@@ -14,6 +14,7 @@ API_ENDPOINT='https://api.wit.ai/speech'
 
 wit_access_token = 'PGXQAYLLA7R7BAJLDBVODGN4QXSADSNN'
 
+# Read the audio
 def read_audio(WAVE_FILENAME):
 	with open(WAVE_FILENAME, 'rb') as f:
 		audio=f.read()
@@ -22,20 +23,13 @@ def read_audio(WAVE_FILENAME):
 def RecognizeSpeech(AUDIO_FILENAME):
 	print AUDIO_FILENAME
 	audio = read_audio(AUDIO_FILENAME)
-	
 	headers = {'authorization':'Bearer ' + wit_access_token,'Content-Type':'audio/mpeg'}
-
 	resp = requests.post(API_ENDPOINT, headers = headers, data=audio)
-
-	print resp
 	data = json.loads(resp.content.decode('utf-8'))
-	print (data)
-
 	text = data['_text']
 	return text
 
 def Check(AUDIO_FILENAME):
-	print("Checking")
 	points, passes, shots = 0, 0, 0
 	text = RecognizeSpeech(AUDIO_FILENAME)
 	list_words = text.split(" ")
@@ -52,8 +46,9 @@ def Check(AUDIO_FILENAME):
 	return points, passes, shots
 
 @app.route("/upload", methods=['POST'])
+
+# this is upload function
 def upload():
-	print "hehe"
 	file = request.files['file']
 	print file
 	format = "%Y-%m-%dT%H:%M:%S"
