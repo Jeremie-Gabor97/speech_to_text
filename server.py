@@ -14,8 +14,6 @@ API_ENDPOINT='https://api.wit.ai/speech'
 
 wit_access_token = 'PGXQAYLLA7R7BAJLDBVODGN4QXSADSNN'
 
-#infile = sys.argv[1]
-
 def read_audio(WAVE_FILENAME):
 	with open(WAVE_FILENAME, 'rb') as f:
 		audio=f.read()
@@ -34,7 +32,6 @@ def RecognizeSpeech(AUDIO_FILENAME):
 	print (data)
 
 	text = data['_text']
-
 	return text
 
 def Check(AUDIO_FILENAME):
