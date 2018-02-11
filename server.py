@@ -36,18 +36,20 @@ def RecognizeSpeech(AUDIO_FILENAME):
 
 def Check(AUDIO_FILENAME):
 	print("Checking")
-	points = 0
+	points, passes, shots = 0, 0, 0
 	text = RecognizeSpeech(AUDIO_FILENAME)
 	list_words = text.split(" ")
 	for i in range(len(list_words)):
 		print(list_words[i])
-		if list_words[i] == "score":
-			points = points + 1
+		if (list_words[i] == "score" or list_words[i] == "scores"):
+			points += 1
+		elif (list_words[i] == "pass" or list_words[i] == "passed" or list_words[i] == "passes"):
+			passes += 1
+		elif(list_words[i] == "shot" or list_words[i] == "shoots"):
+			shots += 1
 	print("the total amount of points was ", points)
 	print("\nYou said: {}".format(text))
-	return points
-
-
+	return points, passes, shots
 
 @app.route("/upload", methods=['POST'])
 def upload():
