@@ -9,9 +9,7 @@ from datetime import datetime
 import audiotranscode
 
 app = Flask(__name__)
-
 API_ENDPOINT='https://api.wit.ai/speech'
-
 wit_access_token = 'PGXQAYLLA7R7BAJLDBVODGN4QXSADSNN'
 
 # Read the audio
@@ -20,6 +18,7 @@ def read_audio(WAVE_FILENAME):
 		audio=f.read()
 	return audio
 
+# API function
 def RecognizeSpeech(AUDIO_FILENAME):
 	print AUDIO_FILENAME
 	audio = read_audio(AUDIO_FILENAME)
